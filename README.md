@@ -32,6 +32,6 @@ Make sure you have .NET SDK and Visual Studio installed on your machine.
 ## Project List
 Here are some of the C# Windows Forms applications included in this repository:
 
-* [Greeting]()
+* [Greeting](https://github.com/htayaung/workspace-winformsapps/tree/main/Greeting)
 
 Feel free to explore each project and check out the individual README files for more detailed information.
