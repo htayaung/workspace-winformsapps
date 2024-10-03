@@ -23,6 +23,8 @@ This project is a simple BMI (Body Mass Index) Calculator developed using C# and
 
 ## Screenshots
 
+https://github.com/user-attachments/assets/8f21ea4f-c15c-4738-a647-cd012eadaf9f
+
 <br/>
 <p align="center">
   <img src="./assets/01.png" alt="BMI Calculator"/>
