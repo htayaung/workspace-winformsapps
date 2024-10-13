@@ -35,5 +35,6 @@ Here are some of the C# Windows Forms applications included in this repository:
 * [Greeting](https://github.com/htayaung/workspace-winformsapps/tree/main/Greeting)
 * [BMICalculator](https://github.com/htayaung/workspace-winformsapps/tree/main/BMICalculator)
 * [SimpleCalculator](https://github.com/htayaung/workspace-winformsapps/tree/main/SimpleCalculator)
+* [ContactManager](https://github.com/htayaung/workspace-winformsapps/tree/main/ContactManager)
 
 Feel free to explore each project and check out the individual README files for more detailed information.
