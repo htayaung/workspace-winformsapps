@@ -1,6 +1,7 @@
 ﻿using ContactManager.Models;
 using ContactManager.Services;
 using ContactManager.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace ContactManager
 {
@@ -94,17 +95,29 @@ namespace ContactManager
 
         public bool HasChanged { get; private set; } = default;
 
-        private readonly ContactService service;
+        private readonly ILogger<FrmSaveContact> logger;
+        private readonly IContactService service;
 
         private Contact contact = new();
 
-        public FrmSaveContact(int? id = null)
+        public FrmSaveContact(
+            ILogger<FrmSaveContact> logger,
+            IContactService service)
         {
             InitializeComponent();
 
-            this.id = id ?? default;
-            service = new ContactService();
+            this.logger = logger;
+            this.service = service;
+        }
 
+        public void SetParams(int? id = null)
+        {
+            this.id = id ?? default;
+        }
+
+        private void FrmSaveContact_Load(object sender, EventArgs e)
+        {
+            logger.LogInformation("FrmSaveContact_Load...");
             TryExecute(() =>
             {
                 if (!isNewRecord)
@@ -129,10 +142,12 @@ namespace ContactManager
                 if (isNewRecord)
                 {
                     service.AddOne(contact);
+                    logger.LogInformation($"Add new contact: {JsonHelper.Serialize(contact)}");
                 }
                 else
                 {
                     service.UpdateOne(contact);
+                    logger.LogInformation($"Update existing contact: {JsonHelper.Serialize(contact)}");
                 }
 
                 HasChanged = true;
@@ -249,9 +264,7 @@ namespace ContactManager
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-
-                // TODO: write to log file
-                Console.WriteLine(ex.Message);
+                logger.LogError(ex.Message);
             }
         }
     }

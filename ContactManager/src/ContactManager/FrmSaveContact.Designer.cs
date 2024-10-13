@@ -37,6 +37,7 @@
             label1 = new Label();
             lblHeader = new Label();
             btnClose = new Button();
+            imageList = new ImageList(components);
             btnSave = new Button();
             rtbAddress = new RichTextBox();
             txtWebsite = new TextBox();
@@ -51,7 +52,6 @@
             txtFirstName = new TextBox();
             lblFirstName = new Label();
             errorMessageProvider = new ErrorProvider(components);
-            imageList = new ImageList(components);
             pnlContactInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorMessageProvider).BeginInit();
             SuspendLayout();
@@ -149,6 +149,14 @@
             btnClose.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
+            // 
+            // imageList
+            // 
+            imageList.ColorDepth = ColorDepth.Depth32Bit;
+            imageList.ImageStream = (ImageListStreamer)resources.GetObject("imageList.ImageStream");
+            imageList.TransparentColor = Color.Transparent;
+            imageList.Images.SetKeyName(0, "check-mark-icon.png");
+            imageList.Images.SetKeyName(1, "close-icon.png");
             // 
             // btnSave
             // 
@@ -274,14 +282,6 @@
             // 
             errorMessageProvider.ContainerControl = this;
             // 
-            // imageList
-            // 
-            imageList.ColorDepth = ColorDepth.Depth32Bit;
-            imageList.ImageStream = (ImageListStreamer)resources.GetObject("imageList.ImageStream");
-            imageList.TransparentColor = Color.Transparent;
-            imageList.Images.SetKeyName(0, "check-mark-icon.png");
-            imageList.Images.SetKeyName(1, "close-icon.png");
-            // 
             // FrmSaveContact
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -292,6 +292,7 @@
             Name = "FrmSaveContact";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FrmSaveContact";
+            Load += FrmSaveContact_Load;
             pnlContactInformation.ResumeLayout(false);
             pnlContactInformation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorMessageProvider).EndInit();

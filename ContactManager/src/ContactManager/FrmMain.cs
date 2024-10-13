@@ -1,21 +1,28 @@
 using ContactManager.Services;
 using ContactManager.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace ContactManager
 {
     public partial class FrmMain : Form
     {
-        private readonly ContactService service;
+        private readonly ILogger<FrmMain> logger;
+        private readonly IContactService service;
         private int selectedId;
 
-        public FrmMain()
+        public FrmMain(
+            ILogger<FrmMain> logger,
+            IContactService service)
         {
             InitializeComponent();
-            service = new ContactService();
+            this.logger = logger;
+            this.service = service;
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            logger.LogInformation("FrmMain_Load...");
             TryExecute(() =>
             {
                 dgvContact.AutoGenerateColumns = false;
@@ -31,7 +38,7 @@ namespace ContactManager
         {
             TryExecute(() =>
             {
-                FrmSaveContact saveContact = new FrmSaveContact();
+                FrmSaveContact saveContact = Program.ServiceProvider.GetRequiredService<FrmSaveContact>();
                 saveContact.ShowDialog();
                 if (saveContact.HasChanged)
                 {
@@ -65,7 +72,8 @@ namespace ContactManager
         {
             TryExecute(() =>
             {
-                FrmSaveContact saveContact = new FrmSaveContact(selectedId);
+                FrmSaveContact saveContact = Program.ServiceProvider.GetRequiredService<FrmSaveContact>();
+                saveContact.SetParams(selectedId);
                 saveContact.ShowDialog();
                 if (saveContact.HasChanged)
                 {
@@ -85,12 +93,14 @@ namespace ContactManager
                 MessageBoxIcon.Question);
                 if (deleteConfirmation == DialogResult.Yes)
                 {
+                    var contact = service.GetOne(selectedId);
                     service.DeleteOne(selectedId);
                     MessageBox.Show(
                         "Deleted successfully.",
                         "Message",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
+                    logger.LogWarning($"Delete contact: {JsonHelper.Serialize(contact)}");
                     BindContacts();
                 }
             });
@@ -150,9 +160,7 @@ namespace ContactManager
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-
-                // TODO: write to log file
-                Console.WriteLine(ex.Message);
+                logger.LogError(ex.Message);
             }
         }
     }

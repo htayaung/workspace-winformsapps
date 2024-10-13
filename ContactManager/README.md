@@ -16,6 +16,7 @@ ContactManager is a Windows Forms application developed using .NET 8, C#, and En
 - **Database**: SQLite
 - **ORM**: Entity Framework Core
 - **UI**: Windows Forms
+- **Logging**: NLog
 
 ## UI Components
 

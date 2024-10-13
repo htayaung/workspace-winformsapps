@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContactManager.Services
 {
-    public class ContactService : IDisposable
+    public class ContactService : IContactService, IDisposable
     {
         private readonly ApplicationDbContext dbContext;
 
         private bool disposed;
 
-        public ContactService()
+        public ContactService(ApplicationDbContext context)
         {
-            dbContext = new ApplicationDbContext();
+            dbContext = context;
         }
 
         public IEnumerable<Contact> GetMany()
