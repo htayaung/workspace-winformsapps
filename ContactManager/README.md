@@ -37,3 +37,6 @@ https://github.com/user-attachments/assets/5752a4cb-a9b9-47e5-8d40-fdafddc777f4
   <img src="./assets/02.png" alt="BMI Calculator"/>
   <img src="./assets/03.png" alt="BMI Calculator"/>
 </p>
+
+## Acknowledgments
+Thanks to [UXWing](https://uxwing.com) for their incredible collection of icons.
