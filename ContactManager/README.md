@@ -29,6 +29,8 @@ The application utilizes a variety of UI elements, including:
 
 ## Screenshots
 
+https://github.com/user-attachments/assets/5752a4cb-a9b9-47e5-8d40-fdafddc777f4
+
 <br/>
 <p align="center">
   <img src="./assets/01.png" alt="BMI Calculator"/>
